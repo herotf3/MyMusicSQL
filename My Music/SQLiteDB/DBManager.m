@@ -60,7 +60,8 @@
  
     if (self.arrColumnNames != nil) {
         [self.arrColumnNames removeAllObjects];
-        self.arrColumnNames = nil;
+//      shall I need the below line?
+//        self.arrColumnNames = nil;
     }
     self.arrColumnNames = [[NSMutableArray alloc] init];
 }
@@ -117,8 +118,7 @@
             }else {
                 // This is the case of an executable query (insert, update, ...). 
                 // Execute the query.
-                BOOL executeQueryResults = sqlite3_step(compiledStatement);
-                if (executeQueryResults == SQLITE_DONE) {
+                if (sqlite3_step(compiledStatement) == SQLITE_DONE) {
                     // Keep the affected rows & last inserted row.
                     self.affectedRows = sqlite3_changes(sqlite3Database); 
                     self.lastInsertedRowID = sqlite3_last_insert_rowid(sqlite3Database);

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#define MUSIC_TABLE_CELL_REUSE_ID @"MusicTableCell"
 
-@interface ViewController : UIViewController
+@interface MyMusicViewController : UIViewController
 
 
 @end

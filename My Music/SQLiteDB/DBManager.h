@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define MUSIC_DATABASE_FILENAME @"musicdb.sql"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DBManager : NSObject
