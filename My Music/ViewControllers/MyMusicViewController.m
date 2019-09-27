@@ -11,20 +11,28 @@
 #import "EditMusicViewController.h"
 #import "DBManager.h"
 #import "MusicInfo.h"
+#import "MusicCollectionViewCell.h"
 
 #define MUSIC_TABLE_ROW_HEIGHT 120
 
 #define EDIT_MUSIC_SEGUE @"editMusicSegue"
 
-@interface MyMusicViewController () <UITableViewDelegate, UITableViewDataSource>{
+#define MUSIC_COLLECTION_CELL_ID @"CollectionCellID"
+
+@interface MyMusicViewController () <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, MusicCollectionDelegate>{
     NSArray* sortMethods;
 }
 
 //MARK: Outlets
 @property (nonatomic, weak) IBOutlet UITableView* musicTableView;
+@property (nonatomic, weak) IBOutlet UICollectionView * musicCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *collectionViewFlowLayout;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *btnAZ;
 @property (weak, nonatomic) IBOutlet UIButton *btnNewest;
 @property (weak, nonatomic) IBOutlet UIButton *btnOldest;
+@property (weak, nonatomic) IBOutlet UIButton *btnChangeLayout;
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMusics;
@@ -41,13 +49,28 @@
     [_btnAZ setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_btnNewest setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_btnOldest setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
-    
+
+    self.isInGirdMode = YES;
     [_musicTableView registerNib:[UINib nibWithNibName:MUSIC_CELL_XIB bundle:nil] forCellReuseIdentifier:MUSIC_TABLE_CELL_REUSE_ID];
     _musicTableView.delegate = self;
     _musicTableView.dataSource = self;
     _musicTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    [self setupCollectionView];
+
     self.dbManager = [[DBManager alloc] initWithDBFileName:MUSIC_DATABASE_FILENAME];
+}
+
+- (void)setIsInGirdMode:(BOOL)isInGirdMode{
+    _isInGirdMode = isInGirdMode;
+    UIImage* icon = isInGirdMode? [UIImage imageNamed:@"icon-gridview"] : [UIImage imageNamed:@"icon-tableview"];
+    [_btnChangeLayout setImage: icon forState:UIControlStateNormal];
+}
+
+- (void)setupCollectionView {
+    [_musicCollectionView registerNib:[UINib nibWithNibName:MUSIC_COLLECTION_CELL_XIB bundle:nil] forCellWithReuseIdentifier:MUSIC_COLLECTION_CELL_ID];
+    _musicCollectionView.dataSource = self;
+    _musicCollectionView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -134,7 +157,7 @@
         [self.arrMusics addObject:musicInfo];
     }
 
-    [self.musicTableView reloadData];
+    [self reloadView];
 }
 
 - (void)editMusicAtIndex:(NSInteger)row {
@@ -161,8 +184,8 @@
     [_btnAZ setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
     [_btnNewest setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_btnOldest setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    
-    [self.musicTableView reloadData];
+
+    [self reloadView];
 }
 
 - (IBAction)actionSortNewest:(id)sender {
@@ -175,8 +198,8 @@
     [_btnAZ setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_btnNewest setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
     [_btnOldest setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-    
-    [self.musicTableView reloadData];
+
+    [self reloadView];
 }
 
 - (IBAction)actionSortOldest:(id)sender {
@@ -189,12 +212,66 @@
     [_btnAZ setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_btnNewest setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
     [_btnOldest setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
-    
+
+    [self reloadView];
+}
+
+- (void)reloadView {
+    [self.musicCollectionView reloadData];
     [self.musicTableView reloadData];
 }
 
--(void) setSelectedButton:(UIButton*) btn{
-    
+- (IBAction)actionChangeLayout:(id)sender {
+    UIView * fromView = self.isInGirdMode ? _musicCollectionView : _musicTableView;
+    UIView * toView = !self.isInGirdMode ? _musicCollectionView : _musicTableView;
+    self.isInGirdMode = !self.isInGirdMode;
+
+    [UIView transitionFromView:fromView toView:toView
+                      duration:0.5f options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionShowHideTransitionViews completion:nil];
 }
+
+
+//MARK: Collection view data source
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.arrMusics.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    MusicCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MUSIC_COLLECTION_CELL_ID forIndexPath:indexPath];
+    [cell bindDataWith:_arrMusics[indexPath.row]];
+    cell.delegate = self;
+    [cell setNeedsLayout];
+    return cell;
+}
+
+//MARK: Collection view flow layout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(200, 200);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+
+    return UIEdgeInsetsZero;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 8;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 8    ;
+}
+
+//MARK: Collection cell delegate
+- (void)didPressDelete:(MusicInfo *)musicInfo {
+    NSUInteger index = [self.arrMusics indexOfObject:musicInfo];
+    [self deleteMusicAtIndex:index];
+}
+
+- (void)didPressEdit:(MusicInfo *)musicInfo {
+    NSUInteger index = [self.arrMusics indexOfObject:musicInfo];
+    [self editMusicAtIndex:index];
+}
+
 
 @end

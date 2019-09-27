@@ -21,6 +21,8 @@
 		DB95059B233C5956008DE853 /* MusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB950599233C5956008DE853 /* MusicCell.m */; };
 		DB95059C233C5956008DE853 /* MusicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB95059A233C5956008DE853 /* MusicCell.xib */; };
 		DB95059E233CA9A9008DE853 /* musicdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = DB95059D233CA9A9008DE853 /* musicdb.sql */; };
+		DBDD6349233DB4DA0004B291 /* MusicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDD6347233DB4DA0004B291 /* MusicCollectionViewCell.m */; };
+		DBDD634A233DB4DA0004B291 /* MusicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBDD6348233DB4DA0004B291 /* MusicCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,9 @@
 		DB950599233C5956008DE853 /* MusicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicCell.m; sourceTree = "<group>"; };
 		DB95059A233C5956008DE853 /* MusicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicCell.xib; sourceTree = "<group>"; };
 		DB95059D233CA9A9008DE853 /* musicdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = musicdb.sql; path = "My Music/musicdb.sql"; sourceTree = SOURCE_ROOT; };
+		DBDD6346233DB4DA0004B291 /* MusicCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicCollectionViewCell.h; sourceTree = "<group>"; };
+		DBDD6347233DB4DA0004B291 /* MusicCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicCollectionViewCell.m; sourceTree = "<group>"; };
+		DBDD6348233DB4DA0004B291 /* MusicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +147,9 @@
 				DB950598233C5956008DE853 /* MusicCell.h */,
 				DB950599233C5956008DE853 /* MusicCell.m */,
 				DB95059A233C5956008DE853 /* MusicCell.xib */,
+				DBDD6346233DB4DA0004B291 /* MusicCollectionViewCell.h */,
+				DBDD6347233DB4DA0004B291 /* MusicCollectionViewCell.m */,
+				DBDD6348233DB4DA0004B291 /* MusicCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 			files = (
 				DB95059E233CA9A9008DE853 /* musicdb.sql in Resources */,
 				DB95059C233C5956008DE853 /* MusicCell.xib in Resources */,
+				DBDD634A233DB4DA0004B291 /* MusicCollectionViewCell.xib in Resources */,
 				DB5B6E0E233B782C00136359 /* LaunchScreen.storyboard in Resources */,
 				DB5B6E0B233B782C00136359 /* Assets.xcassets in Resources */,
 				DB5B6E09233B782C00136359 /* Main.storyboard in Resources */,
@@ -220,6 +229,7 @@
 			files = (
 				DB5B6E00233B782C00136359 /* AppDelegate.m in Sources */,
 				DB5B6E11233B782C00136359 /* main.m in Sources */,
+				DBDD6349233DB4DA0004B291 /* MusicCollectionViewCell.m in Sources */,
 				DB5B6E03233B782C00136359 /* SceneDelegate.m in Sources */,
 				DB5B6E1D233B797900136359 /* DBManager.m in Sources */,
 				DB95059B233C5956008DE853 /* MusicCell.m in Sources */,

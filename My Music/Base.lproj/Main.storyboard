@@ -19,6 +19,17 @@
                                 <rect key="frame" x="0.0" y="94" width="414" height="642"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="16J-kM-TzZ">
+                                <rect key="frame" x="0.0" y="94" width="414" height="642"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="5Wr-kP-Ibz">
+                                    <size key="itemSize" width="200" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykd-dA-Vcu">
                                 <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                 <subviews>
@@ -51,6 +62,17 @@
                                             <action selector="actionSortOldest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ddb-f4-n0N"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slV-Av-8FZ">
+                                        <rect key="frame" x="367" y="9" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="slV-Av-8FZ" secondAttribute="height" multiplier="1:1" id="PCv-xv-Sd3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <state key="normal" image="icon-gridview"/>
+                                        <connections>
+                                            <action selector="actionChangeLayout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJT-jn-2ai"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.083506536576635579" green="0.085341195930827313" blue="0.15855731865284972" alpha="0.9381877200704225" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -60,18 +82,25 @@
                                     <constraint firstItem="ghE-bZ-bt4" firstAttribute="top" secondItem="Ykd-dA-Vcu" secondAttribute="top" constant="8" id="CeJ-FR-oR7"/>
                                     <constraint firstItem="FtD-xv-AHW" firstAttribute="top" secondItem="Ykd-dA-Vcu" secondAttribute="top" constant="8" id="GhI-fl-Dxp"/>
                                     <constraint firstAttribute="bottom" secondItem="1L6-1J-XrT" secondAttribute="bottom" constant="8" id="Itx-SW-5mf"/>
+                                    <constraint firstAttribute="trailing" secondItem="slV-Av-8FZ" secondAttribute="trailing" constant="15" id="Pvh-5Q-qwF"/>
                                     <constraint firstItem="ghE-bZ-bt4" firstAttribute="leading" secondItem="1L6-1J-XrT" secondAttribute="trailing" constant="10" id="TRJ-4s-A9y"/>
                                     <constraint firstAttribute="bottom" secondItem="ghE-bZ-bt4" secondAttribute="bottom" constant="8" id="ZLA-ey-ACY"/>
+                                    <constraint firstItem="slV-Av-8FZ" firstAttribute="top" secondItem="Ykd-dA-Vcu" secondAttribute="top" constant="9" id="ZSK-BU-6G2"/>
                                     <constraint firstItem="FtD-xv-AHW" firstAttribute="leading" secondItem="ghE-bZ-bt4" secondAttribute="trailing" constant="20" id="gx5-yz-jvN"/>
+                                    <constraint firstAttribute="bottom" secondItem="slV-Av-8FZ" secondAttribute="bottom" constant="9" id="rKn-Vc-xfo"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="16J-kM-TzZ" secondAttribute="trailing" id="59G-Mh-R6Q"/>
                             <constraint firstItem="aDE-Up-rrK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5t3-A7-Gn6"/>
                             <constraint firstItem="Ykd-dA-Vcu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7DE-eI-PhU"/>
                             <constraint firstItem="aDE-Up-rrK" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="9J1-d3-9R6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="16J-kM-TzZ" secondAttribute="bottom" id="9e6-ME-eSJ"/>
                             <constraint firstItem="aDE-Up-rrK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EPQ-xX-8FM"/>
+                            <constraint firstItem="16J-kM-TzZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HVo-yz-EWM"/>
+                            <constraint firstItem="16J-kM-TzZ" firstAttribute="top" secondItem="Ykd-dA-Vcu" secondAttribute="bottom" id="Kcv-Nq-tFB"/>
                             <constraint firstItem="aDE-Up-rrK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="OaZ-B5-fsq"/>
                             <constraint firstItem="aDE-Up-rrK" firstAttribute="top" secondItem="Ykd-dA-Vcu" secondAttribute="bottom" id="cen-6d-yga"/>
                             <constraint firstItem="Ykd-dA-Vcu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sGc-at-4Nd"/>
@@ -90,8 +119,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnAZ" destination="1L6-1J-XrT" id="Qk9-Bh-Epb"/>
+                        <outlet property="btnChangeLayout" destination="slV-Av-8FZ" id="8o1-zw-usv"/>
                         <outlet property="btnNewest" destination="ghE-bZ-bt4" id="T6W-aA-UpC"/>
                         <outlet property="btnOldest" destination="FtD-xv-AHW" id="LF6-r9-VHb"/>
+                        <outlet property="collectionViewFlowLayout" destination="5Wr-kP-Ibz" id="oTS-Qx-0uP"/>
+                        <outlet property="musicCollectionView" destination="16J-kM-TzZ" id="Qh8-7O-n2Q"/>
                         <outlet property="musicTableView" destination="aDE-Up-rrK" id="mqi-7s-oXI"/>
                         <segue destination="UPK-jm-sYp" kind="show" identifier="editMusicSegue" id="0w4-xo-jL1"/>
                     </connections>
@@ -183,6 +215,9 @@
             <point key="canvasLocation" x="-65.217391304347828" y="138.58695652173915"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-gridview" width="48" height="48"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="24W-Ed-4Fy"/>
     </inferredMetricsTieBreakers>

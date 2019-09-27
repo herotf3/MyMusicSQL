@@ -12,5 +12,6 @@
 @interface MyMusicViewController : UIViewController
 
 
+@property (assign, nonatomic) BOOL isInGirdMode;
 @end
 
